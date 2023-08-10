@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hospital_patient_tree" model="ir.ui.view">
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">hospital.patient</field> <!-- same as patient.py name-->
+        <field name="arch" type="xml">
+            <tree>
+                <field name='name' string="Patient Name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="ref"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field> <!-- same as patient.py name-->
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name='name'/>
+                            <field name='dob'/>
+                            <field name="age"/>
+                        </group>
+                        <group>
+                            <field name="gender"/>
+                            <field name="ref"/>
+                            <field name="active" invisible="1"/>
+                            <field name="appointment_id"/>
+
+                        </group>
+                    </group>
+                </sheet>
+                <!--chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field> <!-- same as patient.py name-->
+        <field name="arch" type="xml">
+            <search>
+                <field name='name' string="Patient Name"
+                       filter_domain="['|', ('name', 'ilike', self), ('age', 'ilike', self)]"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="dob"/>
+
+                <!--filter -->
+                <filter name="filter_male" string="Male"
+                        domain="[('gender', '=', 'male')]"/>  <!--domain = key and values -->
+                <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"/>
+                <separator/>
+                <!--                <filter name="filter_kids" string="Kids" domain="[('age', '&lt;=', 5)]"/>-->
+                <filter name="filter_archive" string="Archive" domain="[('active', '=', False)]"/>
+
+                <!--group by -->
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by':'gender'}"/>
+                </group>
+
+                <!-- search panel -->
+                <searchpanel>
+                    <field name="gender" icon="fa-bars" select="multi" string="Categories" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+
+    <!--window action-->
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">patients</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field> <!-- same as patient.py name-->
+        <field name="view_mode">tree,form,search</field>
+        <field name="context">{'search_default_filter_male' : 1, 'search_default_group_by_gender': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first patient!
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_patient"
+              parent="menu_patient_master"
+              action='action_hospital_patient'
+              name="patient "
+              sequence="0"/>
+
+</odoo>
