@@ -3,7 +3,7 @@
 
 
 {
-    'name': 'Hospital Management Test',
+    'name': 'Hospital Management',
     'version': '1.0.0',
     'category': 'Hospital',
     'author': 'Dhvani',
