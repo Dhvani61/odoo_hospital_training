@@ -3,7 +3,7 @@
 
 
 {
-    'name': 'Hospital Management',
+    'name': 'Hospital Management update',
     'version': '1.0.0',
     'category': 'Hospital',
     'author': 'Dhvani',
