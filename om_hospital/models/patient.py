@@ -14,8 +14,14 @@ class HospitalPatient(models.Model):
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string='Gender', tracking=True)
     active = fields.Boolean(String='Active',
                             default=True)  # by adding default value as True, records will be visible when they will be created.
+# Image field
+    image = fields.Image(string='Image')
+
+# many2one field
     appointment_id= fields.Many2one('hospital.appointment', String="Appointment")
 
+# many2many field
+    tag_ids = fields.Many2many('hospital.appointment',string='Tags')
 
     @api.depends('dob')
     def _compute_age(self):

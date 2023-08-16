@@ -62,10 +62,17 @@
                         <group>
                             <field name="appointment_date" help="help for appointment date"/>
                             <field name="ref"/>
+<!-- groups="base.group_no_one" to enable for jut developer mode-->
+                            <field name="hide_sales_price" groups="base.group_no_one"/>
                             <field name="doctor_id" widget="many2one_avatar" />
 
-                            <button name="action_test" string="object button" type="object" class="oe_highlight"  help="who needs help for button! -_-"/>
-                            <button name="%(om_hospital.action_hospital_patient)d" string="action button" type="action" class="oe_highlight" confirm="Are you again sure my booiiii?!!!"/>
+
+                            <button name="action_test" string="object button" type="object" class="oe_highlight"
+                                    help="who needs help for button! -_-"
+                                    groups="base.group_no_one"/>
+                            <button name="%(om_hospital.action_hospital_patient)d" string="action button" type="action"
+                                    class="oe_highlight" confirm="Are you again sure?!!!"
+                                    groups="base.group_no_one"/>
                         </group>
                     </group>
 
@@ -84,14 +91,14 @@
                                 <field name="pharmacy_line_ids">
                                     <tree editable="bottom">
                                         <field name="product_id"/>
-                                        <field name="price_unit"/>
+                                        <field name="price_unit" attrs="{'column_invisible': [('parent.hide_sales_price', '=', True)]}"/>
                                         <field name="qty"/>
 
                                     </tree>
 
                                     <form>
                                         <field name="product_id"/>
-                                        <field name="price_unit"/>
+                                        <field name="price_unit" attrs="{'column_invisible': [('parent.hide_sales_price', '=', True)]}"/>
                                         <field name="qty"/>
                                     </form>
                                 </field>

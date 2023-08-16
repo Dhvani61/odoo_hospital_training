@@ -2,7 +2,7 @@
 <odoo>
     <!--window action-->
     <record id="action_hospital_female_patient" model="ir.actions.act_window">
-        <field name="name">Female patients</field>
+        <field name="name">Female patients</field> <!-- shows at page title-->
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.patient</field> <!-- same as patient.py name-->
         <field name="view_mode">tree,form</field>

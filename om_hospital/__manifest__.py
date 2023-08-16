@@ -17,6 +17,7 @@
         'views/patient.xml',
         'views/Female_patient.xml',
         'views/appointment_view.xml',
+        'views/patient_tag_view.xml',
 
     ],
     'demo': [],

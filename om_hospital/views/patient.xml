@@ -19,18 +19,21 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
                     <group>
                         <group>
                             <field name='name'/>
                             <field name='dob'/>
                             <field name="age"/>
+<!--many2many field-->
+                            <field name="tag_ids" widget='many2many_tags' options="{'color_field': 'color'}"/>
+
                         </group>
                         <group>
                             <field name="gender"/>
                             <field name="ref"/>
                             <field name="active" invisible="1"/>
                             <field name="appointment_id"/>
-
                         </group>
                     </group>
                 </sheet>
@@ -79,7 +82,7 @@
 
     <!--window action-->
     <record id="action_hospital_patient" model="ir.actions.act_window">
-        <field name="name">patients</field>
+        <field name="name">patients</field> <!-- shows at page title-->
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.patient</field> <!-- same as patient.py name-->
         <field name="view_mode">tree,form,search</field>
